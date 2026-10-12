@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Safe Till Home — Interactive Concept Demo</title>
+<style>
+:root{--navy:#17233d;--lav:#e9e2ff;--purple:#6852c7;--teal:#73b9ad;--coral:#e99b91;--paper:#fffdf9;--muted:#68738a;--line:#e7e5ee;--green:#24866f;--red:#c94f5c}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(135deg,#f8f5ff,#fffdf9 55%,#eef8f6);font-family:Arial,Helvetica,sans-serif;color:var(--navy)}
+button,select{font:inherit;font-family:Arial,Helvetica,sans-serif} body, h1, h2, h3, h4, p, label, button, select, span, strong, div{font-family:Arial,Helvetica,sans-serif} button{cursor:pointer;border:0;border-radius:14px;padding:13px 17px;font-weight:700;transition:.18s transform,.18s opacity}button:hover{transform:translateY(-1px)}button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.app{max-width:1120px;margin:auto;padding:24px 18px 48px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;flex:0 0 46px;display:grid;place-items:center;border-radius:15px;background:var(--lav);font-size:25px;overflow:hidden}.home-icon{position:relative;display:inline-block;width:19px;height:15px;background:var(--purple);border-radius:3px;margin-top:8px}.home-icon:before{content:"";position:absolute;left:-4px;top:-8px;width:18px;height:18px;background:var(--purple);transform:rotate(45deg);border-radius:2px}.home-icon:after{content:"";position:absolute;left:7px;bottom:0;width:5px;height:9px;background:#fff;border-radius:2px 2px 0 0}.phone-home{transform:scale(1.65);margin-bottom:10px}.brand h1{font-size:21px;margin:0;letter-spacing:-.5px}.brand p{margin:4px 0 0;color:var(--muted);font-size:13px}.pill{font-size:12px;font-weight:800;padding:8px 11px;border-radius:99px;background:#e1f5ef;color:#176c5a;letter-spacing:.3px}
+.layout{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}.panel{background:rgba(255,255,255,.88);border:1px solid rgba(221,216,237,.9);box-shadow:0 18px 45px rgba(49,36,89,.07);border-radius:24px;padding:25px}.eyebrow{font-size:11px;letter-spacing:1.4px;font-weight:800;color:var(--purple);text-transform:uppercase}.panel h2{font-size:28px;line-height:1.15;letter-spacing:-.8px;margin:10px 0}.sub{color:var(--muted);line-height:1.55;margin:0 0 22px}.field{margin:16px 0}.field label{display:block;font-size:13px;font-weight:750;margin-bottom:8px}.field select{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--navy)}.primary{background:var(--purple);color:white;width:100%;box-shadow:0 8px 18px rgba(104,82,199,.2)}.secondary{background:var(--lav);color:#4c3b9d}.danger{background:#fff0f1;color:#a33140}.quiet{background:#f2f4f8;color:#3f4a60}.success{background:#e1f5ef;color:#176c5a}.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.buttons button{flex:1;min-width:125px}.steps{display:flex;gap:6px;margin:0 0 22px}.step{flex:1;height:5px;border-radius:99px;background:#eeebf5}.step.active{background:var(--purple)}.map{height:250px;border-radius:18px;position:relative;overflow:hidden;background:#f1eefb;border:1px solid #e3def5;margin:18px 0}.map svg{position:absolute;inset:0;width:100%;height:100%}.map-label{position:absolute;background:white;border:1px solid #e7e2f2;padding:8px 10px;border-radius:12px;font-size:12px;font-weight:750;box-shadow:0 5px 14px #30215d12}.pin{position:absolute;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--purple);color:#fff;border:4px solid #fff;box-shadow:0 3px 12px #30215d30}.statusrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;background:#f8f6ff;border-radius:14px;margin-top:12px}.statusrow strong{font-size:14px}.statusrow span{font-size:12px;color:var(--muted)}.statusdot{width:9px;height:9px;background:var(--teal);display:inline-block;border-radius:50%;margin-right:7px}.phone{max-width:360px;margin:auto;border:8px solid #22283a;border-radius:34px;background:#fff;min-height:590px;padding:15px 15px 20px;box-shadow:0 20px 35px #17233d20;position:relative}.notch{width:90px;height:18px;background:#22283a;border-radius:0 0 13px 13px;position:absolute;top:-1px;left:calc(50% - 45px)}.phonehead{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:11px;color:var(--muted)}.phonebrand{text-align:center;padding:20px 0 14px}.house{height:42px;display:flex;align-items:center;justify-content:center;font-size:20px;overflow:hidden}.phonebrand h3{margin:4px 0;font-size:20px}.phonebrand p{margin:0;color:var(--muted);font-size:12px}.phonecard{background:#f5f1ff;border-radius:18px;padding:17px;margin:12px 0}.phonecard h4{margin:0 0 7px;font-size:15px}.phonecard p{font-size:12px;line-height:1.5;color:var(--muted);margin:0}.bigbutton{width:100%;margin-top:10px}.phone .primary{padding:13px}.phone .buttons{display:grid;grid-template-columns:1fr 1fr}.phone .buttons button{min-width:0;padding:12px 7px;font-size:12px}.phonefoot{text-align:center;color:#9aa0af;font-size:10px;margin-top:22px}.notice{padding:13px 14px;border-radius:14px;background:#e1f5ef;color:#176c5a;font-size:13px;line-height:1.45;margin-top:12px}.notice.alert{background:#fff0f1;color:#9f3441}.notice.purple{background:#f1edff;color:#4c3b9d}.tiny{font-size:11px;color:var(--muted);line-height:1.5}.bottomnote{margin-top:20px;text-align:center;font-size:12px;color:var(--muted)}.screen-title{font-size:16px;font-weight:800;margin:0 0 8px}.hide{display:none!important}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.panel{padding:19px}.panel h2{font-size:25px}.phone{min-height:540px}.top{align-items:flex-start}.pill{white-space:nowrap}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand"><div class="logo"><span class="home-icon" aria-label="Home"></span></div><div><h1>Safe Till Home</h1><p>A quiet companion for the journey home</p></div></div>
+    <div class="pill">INTERACTIVE CONCEPT DEMO</div>
+  </header>
+  <div class="layout">
+    <section class="panel">
+      <div class="eyebrow">Everyday magic · journey simulator</div>
+      <h2 id="headline">A little reassurance, all the way home.</h2>
+      <p class="sub" id="description">Start a sample journey, check in, explore a simulated route change, and finish at home. No real location is collected or shared.</p>
+      <div class="steps"><div class="step active" id="s1"></div><div class="step" id="s2"></div><div class="step" id="s3"></div><div class="step" id="s4"></div><div class="step" id="s5"></div></div>
+      <div id="setup">
+        <div class="field"><label for="destination">Destination</label><select id="destination"><option>Home</option><option>Hostel</option><option>Coaching Centre</option></select></div>
+        <div class="field"><label for="contact">Trusted contact</label><select id="contact"><option>Mom</option><option>Sibling</option><option>Friend</option></select></div>
+        <div class="field"><label for="mode">Journey mode (demo)</label><select id="mode"><option>Auto-rickshaw</option><option>Bus / Metro</option><option>Walking</option></select></div>
+        <button class="primary" id="start">Home &nbsp; I'm Going Home</button>
+        <p class="tiny" style="margin-top:12px">Prototype only: journey stages and notifications are simulated. This is not an emergency service.</p>
+      </div>
+      <div id="journey" class="hide">
+        <div class="statusrow"><div><strong><span class="statusdot"></span><span id="status">On the way</span></strong><br><span id="statusdetail">Journey started</span></div><div style="text-align:right"><strong id="eta">ETA 6:42 PM</strong><br><span id="modeLabel">Auto-rickshaw</span></div></div>
+        <div class="map" aria-label="Illustrative simulated route">
+          <svg viewBox="0 0 420 250" preserveAspectRatio="none"><path d="M-10 45 L430 210 M20 -10 L160 260 M280 -10 L200 260 M0 180 L420 75 M80 0 L420 145" stroke="#ded8ee" stroke-width="13" fill="none"/><path d="M-10 45 L430 210" stroke="#fff" stroke-width="4" fill="none"/><path id="route" d="M45 45 C110 30 125 100 190 110 S290 180 355 205" stroke="#6852c7" stroke-width="6" stroke-linecap="round" fill="none" stroke-dasharray="7 8"/><circle cx="45" cy="45" r="10" fill="#73b9ad" stroke="#fff" stroke-width="4"/><circle cx="355" cy="205" r="10" fill="#6852c7" stroke="#fff" stroke-width="4"/></svg>
+          <div class="map-label" style="left:18px;top:70px">You are here</div><div class="map-label" style="right:14px;bottom:18px" id="destinationLabel">Home Home</div><div class="pin" style="left:36px;top:26px">●</div><div class="pin" style="right:48px;bottom:27px">Home</div>
+        </div>
+        <div class="buttons"><button class="secondary" id="checkin">✓ I'm Okay</button><button class="danger" id="help">I Need Help</button></div>
+        <div class="buttons"><button class="quiet" id="routechange">Simulate Route Change</button><button class="quiet" id="missed">Simulate Missed Check-In</button></div>
+        <div class="buttons"><button class="success" id="arrive">Home Arrived Home</button><button class="quiet" id="reset">Reset Demo</button></div>
+        <div id="feedback" class="notice purple">Journey started. Your selected contact would receive a journey update in a connected version.</div>
+      </div>
+    </section>
+    <aside class="panel">
+      <div class="eyebrow">User experience preview</div>
+      <h2 style="font-size:23px;margin-bottom:18px">The experience, in your hand.</h2>
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="phonehead"><span>9:41</span><span>Signal &nbsp; Battery</span></div>
+        <div class="phonebrand"><div class="house"><span class="home-icon phone-home" aria-label="Home"></span></div><h3>Safe Till Home</h3><p id="phoneSubtitle">You don't have to feel alone.</p></div>
+        <div class="phonecard" id="phonecard">
+          <h4 id="phoneTitle">Ready to head home?</h4>
+          <p id="phoneText">Choose a destination and let someone you trust know you're on your way.</p>
+          <button class="primary bigbutton" id="phoneAction">I'm going home</button>
+        </div>
+        <div id="phoneExtra" class="hide"></div>
+        <div class="phonefoot">A proposed concept · Demo data only</div>
+      </div>
+      <div class="bottomnote">“You travel alone. You don't have to feel alone.”</div>
+    </aside>
+  </div>
+  <div class="bottomnote">Safe Till Home is a concept prototype. It does not access GPS, send real notifications, contact emergency services, or guarantee safety.</div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+let state="setup", alertTimer=null, dest="Home", contact="Mom", mode="Auto-rickshaw", checkinDone=false;
+function setSteps(n){for(let i=1;i<=5;i++)$("s"+i).classList.toggle("active",i<=n)}
+function notice(msg,type="purple"){const el=$("feedback");el.textContent=msg;el.className="notice "+type}
+function phone(title,text,button,extra="",type=""){
+ $("phoneTitle").textContent=title;$("phoneText").textContent=text;$("phoneAction").textContent=button;
+ $("phoneAction").className="primary bigbutton";$("phoneExtra").className=extra?"notice "+type:"hide";$("phoneExtra").textContent=extra;
+}
+function begin(){
+ dest=$("destination").value;contact=$("contact").value;mode=$("mode").value;state="journey";
+ $("setup").classList.add("hide");$("journey").classList.remove("hide");
+ $("headline").textContent="You're on your way."; $("description").textContent="Your journey is active in this simulation. Try the check-in, route-change, or missed-check-in scenarios.";
+ $("status").textContent="On the way";$("statusdetail").textContent="Journey started · "+contact+" selected";$("modeLabel").textContent=mode;$("destinationLabel").textContent="Home "+dest;$("eta").textContent="ETA 6:42 PM";
+ setSteps(2);phone("Journey started","You're travelling to "+dest+". "+contact+" is your selected trusted contact.","View journey","Simulated update prepared for "+contact+".");notice("Journey started. In a connected version, "+contact+" would receive the update.","purple");
+}
+$("start").onclick=begin;$("phoneAction").onclick=()=>{if(state==="setup")begin();else if(state==="arrived")reset();else if(state==="route"||state==="missed")checkin();else checkin()};
+function checkin(){
+ state="journey";checkinDone=true;setSteps(3);$("status").textContent="Check-in complete";$("statusdetail").textContent="You confirmed you're okay";phone("You're checked in","Thanks for confirming. You can continue your journey.","Continue","Your response is recorded in this demo.","");notice("Check-in complete. The simulated contact status is now reassured.","");
+}
+$("checkin").onclick=checkin;
+$("help").onclick=()=>{state="help";setSteps(3);phone("You asked for help","This prototype can demonstrate a help request. In a real service, configured contacts and local emergency options would need to be implemented and tested.","Back to journey","Demo only: no message has been sent and no emergency service has been contacted.","alert");notice("Help selected. No real alert was sent. A production version needs verified contact and emergency workflows.","alert");};
+$("routechange").onclick=()=>{state="route";setSteps(3);$("status").textContent="Check-in needed";$("statusdetail").textContent="Simulated route change";$("route").setAttribute("stroke","#d46b77");phone("Are you okay?","We've noticed a change in your journey. A route change alone does not mean danger.","I'm okay","Please confirm your status before any escalation.","alert");notice("Simulated route change. The system checks with the user first; it does not assume danger.","alert");};
+$("missed").onclick=()=>{state="missed";setSteps(4);$("status").textContent="Follow-up check-in";$("statusdetail").textContent="Simulated missed response";phone("Still with us?","We haven't received a check-in. Are you okay?","I'm okay","If there is still no response, a real version could notify your chosen contact according to user settings.","alert");notice("Missed check-in simulated. No real contact was notified.","alert");};
+$("arrive").onclick=()=>{state="arrived";setSteps(5);$("status").textContent="Journey complete";$("statusdetail").textContent="Arrival marked manually";$("route").setAttribute("stroke","#24866f");phone("You're home","Your journey is complete. Take a breath; you're home.","Start again","In a connected version, "+contact+" would receive an arrival update.","");notice("Journey completed. The arrival message is simulated.","");$("headline").textContent="A small moment of relief."; $("description").textContent="The journey ends with reassurance, not alarm."};
+function reset(){state="setup";checkinDone=false;$("setup").classList.remove("hide");$("journey").classList.add("hide");$("headline").textContent="A little reassurance, all the way home.";$("description").textContent="Start a sample journey, check in, explore a simulated route change, and finish at home. No real location is collected or shared.";$("route").setAttribute("stroke","#6852c7");setSteps(1);phone("Ready to head home?","Choose a destination and let someone you trust know you're on your way.","I'm going home");}
+$("reset").onclick=reset;
+</script>
+</body>
+</html>
